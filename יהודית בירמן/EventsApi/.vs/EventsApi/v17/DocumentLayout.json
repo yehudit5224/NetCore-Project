@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "T:\\Group B\\NetCore\\\u05D9\u05D4\u05D5\u05D3\u05D9\u05EA \u05D1\u05D9\u05E8\u05DE\u05DF\\EventsApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2798FE65-B418-4D78-89F9-77EA916ACA6C}|EventsApi\\EventsApi.csproj|t:\\group b\\netcore\\\u05D9\u05D4\u05D5\u05D3\u05D9\u05EA \u05D1\u05D9\u05E8\u05DE\u05DF\\eventsapi\\eventsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2798FE65-B418-4D78-89F9-77EA916ACA6C}|EventsApi\\EventsApi.csproj|solutionrelative:eventsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "T:\\Group B\\NetCore\\\u05D9\u05D4\u05D5\u05D3\u05D9\u05EA \u05D1\u05D9\u05E8\u05DE\u05DF\\EventsApi\\EventsApi\\Program.cs",
+              "RelativeDocumentMoniker": "EventsApi\\Program.cs",
+              "ToolTip": "T:\\Group B\\NetCore\\\u05D9\u05D4\u05D5\u05D3\u05D9\u05EA \u05D1\u05D9\u05E8\u05DE\u05DF\\EventsApi\\EventsApi\\Program.cs",
+              "RelativeToolTip": "EventsApi\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:05:40.453Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

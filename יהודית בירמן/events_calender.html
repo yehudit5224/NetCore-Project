@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+    </script>
+  </head>
+  <body>
+    <div style="display: flex; gap: 30px; justify-content: center;">
+      <button onclick="openAddForm()()">add event</button>
+      <button onclick="openUpDateForm()">update event</button>
+      <button onclick="openDeleteForm()">delete event</button>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <!-- טופס להוספת אירוע -->
+      <div style="display: flex; text-align: left; justify-content: center; visibility: hidden;" id="addForm">
+        <form action="">
+          <div>
+            <label for="id">Id:</label>
+            <br />
+            <input type="number" id="id" class="input">
+          </div>
+          <div>
+            <label for="title">Title:</label>
+            <br />
+            <input type="text" value="Enter the title of your event" id="title" class="input">
+          </div>
+          <br />
+          <div>
+            <label for="date">Date:</label>
+            <br />
+            <input type="date" id="date" class="input">
+          </div>
+          <div>
+            <button type="button" onclick="addEvent()" class="button okButton">Add</button>
+          </div>
+        </form>
+      </div>
+      <!-- טופס לעידכון אירוע -->
+      <div style="display: flex; text-align: left; justify-content: center; visibility: hidden;" id="upDateForm">
+        <form action="">
+          <div>
+            <label for="idToUpdate">Id:</label>
+            <br />
+            <input type="text" id="idToUpdate" class="input">
+          </div>
+          <div>
+            <label for="titleToUpdate">Title:</label>
+            <br />
+            <input type="text" value="Enter the title of your event" id="titleToUpdate" class="input">
+          </div>
+          <br />
+          <div>
+            <label for="dateToUpdate">Date:</label>
+            <br />
+            <input type="date" id="dateToUpdate" class="input">
+          </div>
+          <div>
+            <button type="button" onclick="upDateEvent()" class="button okButton">UpDate</button>
+          </div>
+      </div>
+      <!-- טופס למחיקת אירוע -->
+      <div id="delete" style="visibility: hidden;">
+        <label for="idToDelete">Enter event's id to delete</label>
+        <br />
+        <input type="number" id="idToDelete" class="input">
+        <button type="button" onclick="deleteEvent()" class="button okButton">Delete</button>
+      </div>
+    </div>
+    <!-- תצוגת כל האירועים בזמן אמת -->
+    <div>
+      <p>These are your events</p>
+      <div id="eventsList" style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 12px;"></div>
+    </div>
+    <div id='calendar'></div>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+          
+        });
+        calendar.render();
+      });
+
+      getAllEvents()
+
+    function openAddForm() {
+      document.getElementById("addForm").style.visibility = 'visible';
+    }
+
+    function addEvent() {
+      let title = document.getElementById("title").value;
+      let date = document.getElementById("date").value;
+      axios.post('https://localhost:7279/api/Events', { id, title, date }).then((res) => {
+        alert("Your event added successfully!     " + JSON.stringify(res.data));
+        getAllEvents()
+      })
+      document.getElementById("addForm").style.visibility = 'hidden';
+    }
+
+    function openUpDateForm() {
+      document.getElementById("upDateForm").style.visibility = 'visible';
+    }
+
+    function upDateEvent() {
+      let id = +document.getElementById("idToUpdate").value;
+      let title = document.getElementById("titleToUpdate").value;
+      let date = document.getElementById("dateToUpdate").value;
+      axios.put(`https://localhost:7279/api/Events/${id}`, { id, title, date }).then((res) => {
+        alert("Your event updated successfully!     " + JSON.stringify(res.data));
+        getAllEvents()
+      })
+      document.getElementById("upDateForm").style.visibility = 'hidden';
+    }
+
+    function getAllEvents() {
+      axios.get('https://localhost:7279/api/Events').then((res) => {
+        console.log(res.data);
+        var nHTML = '';
+        if (res.data.length === 0) {
+          nHTML += '<p style="color: red;">You do not have events</p>'
+        }
+        else {
+          res.data.forEach(function (item) {
+            nHTML += '<div style="border: 5px solid bisque; border - radius: 7px; padding: 10px; "> <span> Id: </span>' + item.id
+              + '</br> <span> Title: </span>' + item.title +
+              '</br><span> Date: </span>' + item.date + '</div>';
+          });
+        }
+
+        document.getElementById("eventsList").innerHTML = nHTML
+      })
+    }
+
+    function openDeleteForm() {
+      document.getElementById("delete").style.visibility = 'visible';
+    }
+
+    function deleteEvent() {
+      let id = +document.getElementById("idToDelete").value;
+      axios.delete(`https://localhost:7279/api/Events/${id}`).then((res) => {
+        alert("Your event delete successfully!");
+        getAllEvents()
+        document.getElementById("delete").style.visibility = 'hidden';
+      })
+    }
+
+    </script>
+  </body>
+</html>

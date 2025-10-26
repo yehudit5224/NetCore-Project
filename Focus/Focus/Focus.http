@@ -1,0 +1,6 @@
+@Focus_HostAddress = http://localhost:5248
+
+GET {{Focus_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
